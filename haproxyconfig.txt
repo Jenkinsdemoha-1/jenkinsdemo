@@ -5,7 +5,8 @@
         stats socket /run/haproxy/admin.sock mode 660 level admin
         stats timeout 30s
         user haproxy
-        group haproxydaemon
+        group haproxy
+      daemon
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -39,7 +40,7 @@ frontend ft_jenkins
         # Set the default backend
         default_backend    bk_jenkins
         reqadd             X-Forwarded-Proto:\ http
-
 backend bk_jenkins
         # Define the backend servers
         server             jenkins1 35.222.13.53:8080 check
+        server             jenkins2 35.225.165.7:8080 check backup
